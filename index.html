@@ -78,26 +78,31 @@
       clearStage();
       const hint = document.createElement('div'); hint.textContent='"Buraya Tıkla!" (ama dikkat — buton kaçıyor)';
       const wrap = document.createElement('div'); wrap.className='dodger-wrap';
-      const btn = document.createElement('button'); btn.className='btn dodger'; btn.textContent='Buraya Tıkla!';
-      let attempts = 0;
+      const btn = document.createElement('button'); btn.className='btn dodger'; btn.id='dodgerBtn'; btn.textContent='Buraya Tıkla!';
+
+      // kaçma sayaçları
+      let hoverCount = 0;
+      const maxRuns = 10;
 
       function moveRandom(){
-        // place within wrap bounds
         const W = wrap.clientWidth; const H = wrap.clientHeight;
-        const x = Math.random() * (W - 120) + 60; // padding
-        const y = Math.random() * (H - 40) + 20;
+        const x = Math.random() * (W - 120) + 25;
+        const y = Math.random() * (H - 40) + 15;
         btn.style.left = x + 'px'; btn.style.top = y + 'px';
       }
 
-      // on mouseenter move
+      // mouse üzerindeyken kaçma
       btn.addEventListener('mouseenter', ()=>{
-        attempts++; if(attempts<6) moveRandom();
+        if(hoverCount < maxRuns){
+          hoverCount++;
+          moveRandom();
+        }
       });
 
-      // if user manages to click (mobile or fast)
+      // mobil tıklama durumunda
       btn.addEventListener('click', ()=>{step=2; renderStep3()});
 
-      wrap.appendChild(btn);
+      wrap.appendChild(btn(btn(btn);
       stage.append(hint, wrap);
 
       // initial position center after layout
