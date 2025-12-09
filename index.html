@@ -73,7 +73,7 @@
     // STAGE 2: Dodging button
     function renderStep2(){
       clearStage();
-      const hint = document.createElement('div'); hint.textContent='\"Buraya Tıkla!\" (biraz zorrr :)))';
+      const hint = document.createElement('div'); hint.textContent='\"Buraya Tıkla!\" Motor becerileri';
       const wrap = document.createElement('div'); wrap.className='dodger-wrap';
       const btn = document.createElement('button'); btn.className='btn dodger'; btn.id='dodgerBtn'; btn.textContent='Buraya Tıkla!';
 
@@ -158,7 +158,7 @@
 
       const openBtn = document.createElement('button'); openBtn.className='btn'; openBtn.textContent='Tinanın Topu Burada!';
       openBtn.onclick = ()=>{
-        gift.classList.add('shake'); openBtn.disabled = true; openBtn.textContent = 'Açılıyor...'; setTimeout(()=>{ renderRose(); }, 900);
+        gift.classList.add('shake'); openBtn.disabled = true; openBtn.textContent = 'Paket Açılıyor...'; setTimeout(()=>{ renderRose(); }, 900);
       };
 
       stage.append(txt, boxWrap, openBtn);
