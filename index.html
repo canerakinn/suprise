@@ -73,13 +73,13 @@
     // STAGE 2: Dodging button
     function renderStep2(){
       clearStage();
-      const hint = document.createElement('div'); hint.textContent='\"Buraya Tıkla!\" (ama dikkat — buton kaçıyor)';
+      const hint = document.createElement('div'); hint.textContent='\"Buraya Tıkla!\" (biraz zorrr :)))';
       const wrap = document.createElement('div'); wrap.className='dodger-wrap';
       const btn = document.createElement('button'); btn.className='btn dodger'; btn.id='dodgerBtn'; btn.textContent='Buraya Tıkla!';
 
       // kaçma sayaçları
       let hoverCount = 0;
-      const maxRuns = 10;
+      const maxRuns = 12;
 
       function moveRandom(){
         const W = Math.max(wrap.clientWidth, 120);
