@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sürpriz Gül</title>
+  <style>
+    :root{--bg:#0f172a;--card:#0b1220;--accent:#ef476f}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:linear-gradient(180deg,var(--bg),#071020);color:#fff}
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px}
+    .card{background:rgba(255,255,255,0.03);padding:28px;border-radius:14px;box-shadow:0 8px 30px rgba(2,6,23,0.6);text-align:center;max-width:760px;width:100%}
+    h1{margin:0 0 12px;font-size:1.6rem}
+    p.lead{opacity:.85;margin:0 0 20px}
+
+    /* Rose area */
+    .rose-wrap{display:flex;align-items:center;justify-content:center;gap:28px}
+    svg{width:320px;max-width:44vw;height:auto}
+
+    /* subtle bloom animation */
+    .petal{transform-origin:50% 60%;animation:breathe 3.8s ease-in-out infinite}
+    .petal:nth-child(1){animation-delay:0s}
+    .petal:nth-child(2){animation-delay:.12s}
+    .petal:nth-child(3){animation-delay:.24s}
+    .leaf{transform-origin:60% 80%;animation:leaf 4s ease-in-out infinite}
+
+    @keyframes breathe{
+      0%{transform:scale(0.98) rotate(0deg)}
+      50%{transform:scale(1.02) rotate(0.7deg)}
+      100%{transform:scale(0.98) rotate(0deg)}
+    }
+    @keyframes leaf{
+      0%{transform:translateY(0) rotate(0)}
+      50%{transform:translateY(-2px) rotate(-3deg)}
+      100%{transform:translateY(0) rotate(0)}
+    }
+
+    .reveal-btn{display:inline-block;margin-top:18px;padding:10px 18px;border-radius:999px;background:linear-gradient(90deg,#ff7aa2,#ef476f);color:#fff;border:0;cursor:pointer;font-weight:600}
+    .message{margin-top:18px;font-size:1.05rem;opacity:0;transform:translateY(6px);transition:all .45s cubic-bezier(.2,.9,.3,1)}
+    .message.visible{opacity:1;transform:none}
+
+    footer{margin-top:20px;font-size:.85rem;opacity:.6}
+
+    /* small-screen adjustments */
+    @media (max-width:520px){svg{width:260px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>Sana küçük bir sürprizim var 🌹</h1>
+      <p class="lead">Butona tıklayın, gülün açılmasını izleyin — sonra mesajımı okuyabilirsiniz.</p>
+
+      <div class="rose-wrap">
+        <!-- Simple stylized rose SVG -->
+        <svg viewBox="0 0 200 200" role="img" aria-label="Sürpriz gül">
+          <defs>
+            <linearGradient id="g1" x1="0" x2="1">
+              <stop offset="0" stop-color="#ff7aa2" />
+              <stop offset="1" stop-color="#ef476f" />
+            </linearGradient>
+            <linearGradient id="g2" x1="0" x2="1">
+              <stop offset="0" stop-color="#067b50" />
+              <stop offset="1" stop-color="#0a7f5a" />
+            </linearGradient>
+          </defs>
+
+          <!-- stem -->
+          <path d="M100 140 C98 120 110 110 106 90" stroke="#0b6b46" stroke-width="6" stroke-linecap="round" fill="none" />
+
+          <!-- leaves -->
+          <path class="leaf" d="M108 110 C132 96 150 112 128 124 C120 110 108 110 108 110" fill="url(#g2)" opacity="0.95" />
+          <path class="leaf" d="M92 118 C68 104 50 120 72 132 C80 118 92 118 92 118" fill="url(#g2)" opacity="0.95" />
+
+          <!-- petals (simple layers) -->
+          <g transform="translate(100,86)">
+            <ellipse class="petal" rx="30" ry="22" cx="0" cy="0" fill="url(#g1)" opacity="0.98" />
+            <ellipse class="petal" rx="24" ry="18" cx="-10" cy="-6" fill="#ff93b0" opacity="0.95" />
+            <ellipse class="petal" rx="24" ry="18" cx="10" cy="-6" fill="#ff3b6b" opacity="0.95" />
+            <ellipse class="petal" rx="18" ry="14" cx="0" cy="-12" fill="#ffceda" opacity="0.98" />
+            <circle class="petal" r="8" cx="0" cy="2" fill="#ff153f" />
+          </g>
+        </svg>
+
+      </div>
+
+      <button id="reveal" class="reveal-btn">Gülü aç</button>
+      <div id="msg" class="message">Seni çok seviyorum 💖 — <strong>İyi ki varsın</strong></div>
+
+      <footer>İstersen bu sayfayı kendine göre düzenleyebilirsin. (Animasyon / metin değiştirilebilir.)</footer>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById('reveal');
+    const msg = document.getElementById('msg');
+    btn.addEventListener('click', ()=>{
+      // little pop + show message
+      btn.disabled = true;
+      btn.textContent = 'Açılıyor...';
+      setTimeout(()=>{
+        document.querySelectorAll('.petal').forEach((el,i)=>{
+          el.style.transition = 'transform 700ms cubic-bezier(.2,.9,.3,1)';
+          el.style.transform = 'scale(1.12) translateY(-6px)';
+        });
+        msg.classList.add('visible');
+        btn.textContent = 'Tekrar göster';
+        btn.disabled = false;
+      },700);
+    });
+  </script>
+</body>
+</html>
